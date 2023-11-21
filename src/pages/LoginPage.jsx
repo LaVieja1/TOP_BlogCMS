@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 const LoginForm = ({ setUserAuth }) => {
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [loginErr, setLoginErr] = useState(false);
 
     const onSubmit = async (data) => {
