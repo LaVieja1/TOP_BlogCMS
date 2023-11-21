@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -10,7 +10,7 @@ const EditPost = () => {
     const [successMsg, setSuccessMsg] = useState(false);
 
     const { register, handleSubmit, errors } = useForm();
-    let history = useHistory();
+    let history = useNavigate();
     let { id } = useParams();
 
     useEffect(() => {
@@ -149,7 +149,7 @@ const EditPost = () => {
                         <Form.Group>
                             <Form.Label htmlFor="title">Titulo:</Form.Label>
                             <Form.Control
-                                ref={register({ required: "campo requerido" })}
+                                ref={...register("campo requerido", { required: true })}
                                 name="title"
                                 defaultValue={post.title}
                             ></Form.Control>
@@ -161,7 +161,7 @@ const EditPost = () => {
                             <Form.Control
                                 as="textarea"
                                 name="text"
-                                ref={register({ required: "campo requerido" })}
+                                ref={...register("campo requerido", { required: true })}
                                 defaultValue={post.text}
                             ></Form.Control>
                             {errors.text && <Form.Text>Campo requerido</Form.Text>}
@@ -171,7 +171,7 @@ const EditPost = () => {
                             <Form.Label htmlFor="author_name">Autor:</Form.Label>
                             <Form.Control
                                 name="author_name"
-                                ref={register({ required: "campo requerido" })}
+                                ref={...register("campo requerido", { required: true })}
                                 defaultValue={post.author_name}
                             ></Form.Control>
                             {errors.author_name && <Form.Text>Campo requerido</Form.Text>}

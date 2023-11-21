@@ -44,7 +44,7 @@ const LoginForm = ({ setUserAuth }) => {
                     name="username"
                     type="text"
                     placeholder="Nombre"
-                    ref={register({ required: "campo requerido" })}
+                    ref={...register("campo requerido", { required: true })}
                 ></Form.Control>
                 {errors.username && <Form.Text>{errors.username.message}</Form.Text>}
             </Form.Group>
@@ -57,7 +57,7 @@ const LoginForm = ({ setUserAuth }) => {
                     autoComplete="current-password"
                     name="password"
                     type="password"
-                    ref={register({ required: "campo requerido" })}
+                    ref={...register("campo requerido", { required: true })}
                 ></Form.Control>
 
                 {errors.password && <Form.Text>{errors.password.message} </Form.Text>}

@@ -1,10 +1,10 @@
 import React from "react";
-import { useRouteMatch, Link } from "react-router-dom";
+import { useMatch, Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 const Post = ({ post }) => {
-    let match = useRouteMatch();
+    let match = useMatch();
     return (
         <Card
             style={{

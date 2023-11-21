@@ -1,5 +1,5 @@
 import { useState, React } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 const NewPost = () => {
     const [successMsg, setSuccessMsg] = useState(false);
     const { register, handleSubmit, errors } = useForm();
-    let history = useHistory();
+    let history = useNavigate();
 
     const submitForm = async (data) => {
         const token = localStorage.getItem("token");
@@ -38,7 +38,7 @@ const NewPost = () => {
                 <Form.Group>
                     <Form.Label htmlFor="title">Titulo:</Form.Label>
                     <Form.Control
-                        ref={register({ required: "campo requerido" })}
+                        ref={...register("campo requerido", { required: true })}
                         name="titulo"
                     ></Form.Control>
                     {errors.title && <Form.Text>Campo requerido</Form.Text>}
@@ -49,7 +49,7 @@ const NewPost = () => {
                     <Form.Control
                         as="textarea"
                         name="text"
-                        ref={register({ required: "campo requerido" })}
+                        ref={...register("campo requerido", { required: true })}
                     ></Form.Control>
                     {errors.text && <Form.Text>Campo requerido</Form.Text>}
                 </Form.Group>
@@ -58,7 +58,7 @@ const NewPost = () => {
                     <Form.Label htmlFor="author_name">Autor:</Form.Label>
                     <Form.Control
                         name="author_name"
-                        ref={register({ required: "campo requerido" })}
+                        ref={...register("campo requerido", { required: true })}
                     ></Form.Control>
                     {errors.author_name && <Form.Text>Campo requerido</Form.Text>}
                 </Form.Group>

@@ -1,4 +1,4 @@
-import { Route, HashRouter, Switch, Redirect } from "react-router-dom";
+import { Route, HashRouter, Routes, Navigate } from "react-router-dom";
 import LoginForm from "./pages/LoginPage";
 import Home from "./pages/Home";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-function Routes() {
+function PagesRoutes() {
     const [userAuth, setUserAuth] = useState(false);
 
     useEffect(() => {
@@ -32,32 +32,14 @@ function Routes() {
                             setUserAuth={setUserAuth}
                             className="Nav"
                         />
-                        <Switch>
+                        <Routes>
                             {" "}
-                            <Route exact path="/">
-                                <Redirect to="/posts" />
-                            </Route>
-                            <Route exact path="/posts">
-                                {!userAuth ? <LoginPage setUserAuth={setUserAuth} /> : <Home />}
-                            </Route>
-                            <Route exact path="/posts/:id">
-                                {!userAuth ? (
-                                    <LoginForm setUserAuth={setUserAuth} />
-                                ) : (
-                                    <EditPost />
-                                )}
-                            </Route>
-                            <Route path="/newpost">
-                                {!userAuth ? (
-                                    <LoginForm setUserAuth={setUserAuth} />
-                                ) : (
-                                    <NewPost />
-                                )}
-                            </Route>
-                            <Route path="/">
-                                <p>404</p>
-                            </Route>
-                        </Switch>
+                            <Route path="/" element={<Navigate to="/posts" />} />
+                            <Route path="/posts" element={!userAuth ? <LoginForm setUserAuth={setUserAuth} /> : <Home />} />
+                            <Route path="/posts/:id" element={!userAuth ? (<LoginForm setUserAuth={setUserAuth} /> ) : (<EditPost />)} />
+                            <Route path="/newpost" element={!userAuth ? (<LoginForm setUserAuth={setUserAuth} /> ) : (<NewPost />)}/>
+                            <Route path="/" element={<p>404</p>} />
+                        </Routes>
                     </Col>
                 </Row>
             </Container>
@@ -65,4 +47,4 @@ function Routes() {
     );
 }
 
-export default Routes;
+export default PagesRoutes;
